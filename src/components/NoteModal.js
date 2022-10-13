@@ -4,7 +4,7 @@ import RoundBtn from './RoundBtn';
 import colors from '../assets/colors';
 
 
-const NoteModal = ({ visible, onClose, onSubmit, isEdit}) => {
+const NoteModal = ({ visible, onClose, onSubmit, note, isEdit}) => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
 
@@ -12,33 +12,33 @@ const NoteModal = ({ visible, onClose, onSubmit, isEdit}) => {
     Keyboard.dismiss();
   } 
 
-  useEffect(() => {
-    if (isEdit) {
-      setTitle(note.title)
-      setDescr(note.descr)
+  useEffect(() => { 
+    if (isEdit) { 
+      setTitle( note.title)  
+      setDescr( note.descr)
     }
-  }, [isEdit]);
+  }, [isEdit]);   
 
-  const handleOnChangeText = (text,valueFor) => {
+  const handleOnChangeText = (text, valueFor) => {
     if(valueFor === 'title'){
       setTitle(text);
     }
     if(valueFor === 'descr'){
       setDescr(text);
     }
-  }
+  };
 
   const handleSubmit = () => {
     if (!title.trim() && !descr.trim()) // if no title and no descr
       return onClose();                 // close the modal    
 
-    if(isEdit){
+    if (isEdit){ // for edited
       onSubmit(title, descr, Date.now()) // else submit the title and descr
     } else {
       onSubmit(title, descr)
       setTitle('');                       // clear the title
-      setDescr(''); 
-      }                                   // clear the descr  
+      setDescr('');                       // clear the descr
+      }                                     
       onClose();                          // and close the modal  
     };
 
@@ -63,15 +63,23 @@ const NoteModal = ({ visible, onClose, onSubmit, isEdit}) => {
 
           <TextInput  
             onChangeText={(text) => handleOnChangeText(text, 'descr')} 
-            style={[styles.input, styles.description]}
+            style={[styles.input, styles.descr]}
             multiline value={descr} placeholder='Note:' />
 
           <View style={styles.btnCon}>
-            <RoundBtn antIconName='check' size={15} onPress={handleSubmit} 
-            style={styles.icon} />   
-            { title.trim() || descr.trim() ? 
-            <RoundBtn antIconName='close' size={15} onPress={closeModal} /> 
-            : null }  
+            <RoundBtn 
+              antIconName='check' 
+              size={15} 
+              onPress={handleSubmit} 
+              style={styles.icon} />  
+
+            { title.trim() || descr.trim() ? (
+            <RoundBtn 
+              antIconName='close' 
+              size={15} 
+              onPress={closeModal} /> 
+            ) : null } 
+
           </View>
         </View>
 
@@ -81,7 +89,7 @@ const NoteModal = ({ visible, onClose, onSubmit, isEdit}) => {
       </Modal>
     </>
   )
-}
+};
 
 export default NoteModal;
 
@@ -99,6 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     margin: 10,
+    color: colors.DARK,
   },
   title: {
     fontSize: 30,
@@ -110,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'coral',
     borderRadius: 7,
   },
-  description: {
+  descr: {
     minHeight: 200,
     padding: 5,
     boxShadow: '4px 4px 10px rgba(0,0,0,0.5)',

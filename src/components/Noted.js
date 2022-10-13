@@ -1,16 +1,16 @@
+import React from 'react'
 import { Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import colors from '../assets/colors';
-import React from 'react'
 
 const Noted = ({item, onPress}) => {
   const {title, descr} = item
   return (
-    <TouchableOpacity onPress={onPress} numberOfLines={3} style={styles.container}>
-        <Text style={styles.title} >{title}</Text>
-        <Text numberOfLines={4} >{descr}</Text>  
+    <TouchableOpacity onPress={onPress}  style={styles.container}>
+        <Text style={styles.title} numberOfLines={3}> {title} </Text>
+        <Text numberOfLines={4}> {descr} </Text>  
     </TouchableOpacity>
   )
-}
+};
 
 export default Noted
 

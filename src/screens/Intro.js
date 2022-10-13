@@ -1,6 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, StatusBar, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import colors from '../assets/colors';
 import RoundBtn from '../components/RoundBtn';
@@ -16,7 +16,7 @@ const Intro = ({ onFinish }) => {
   const handleSubmit = async () => {
     const user = {name: name};
     await AsyncStorage.setItem('user', JSON.stringify(user)); // store the user object in AsyncStorage, has to be a string. 
-    if (onFinish) onFinish();
+    if (onFinish) {onFinish()};
   };
 
   return (
@@ -31,15 +31,16 @@ const Intro = ({ onFinish }) => {
           style={styles.textInput} 
         />
         { name.trim().length > 3 ? ( 
-          <RoundBtn antIconName='arrowright' onPress={handleSubmit}/> 
+          <RoundBtn antIconName='arrowright' onPress={handleSubmit} /> 
         ) : null }
       </View>
     </>
   );
-}
+};
 
 export default Intro;
 
+const width = Dimensions.get('window').width - 40;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -12,10 +12,17 @@ const SearchBar = ({value, onClear, onChangeText}) => {
         placeholder='Search...'
         onChangeText={onChangeText}
         />
-        {value ? (<AntDesign name="close" onPress={onClear} color={colors.PRIMARY} style={styles.clearIcon}></AntDesign>) : null}
+        {value ? (
+          <AntDesign 
+            name="close" 
+            onPress={onClear} 
+            color={colors.PRIMARY} 
+            style={styles.clearIcon}
+          />
+        ) : null}
     </View>
   )
-}
+};
 
 export default SearchBar
 

@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const NoteContext = createContext();
 
-const NoteProvider = ({children}) => {
+const NoteProvider = ( {children} ) => {
   const [notes, setNotes] = useState([]) // to store the notes
 
   const findNotes = async () => {
@@ -18,11 +18,11 @@ const NoteProvider = ({children}) => {
     },[]);
 
   return (
-    <NoteContext.Provider value={{notes, setNotes, findNotes}}>
-      {children}
+    <NoteContext.Provider value={{ notes, setNotes, findNotes }}>
+      { children }
     </NoteContext.Provider>
-  )
-}
+  );
+};
 
 export const useNotes = () => useContext(NoteContext);
 
